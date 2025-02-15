@@ -1,1 +1,11 @@
+Bu kodlar, avtomobil məlumatları üzərində müxtəlif maşın öyrənmə modelləri tətbiq edərək qiymət proqnozlaşdırmaq üçün istifadə olunur. İlk olaraq, məlumatlar yüklənir və təhlil edilir. Məlumatların təmizlənməsi və hazırlanması üçün LabelEncoder və get_dummies kimi üsullardan istifadə edilir. Bu, kateqoriyal məlumatları rəqəmsal formata çevirir və modelin daha yaxşı işləməsini təmin edir.
 
+Daha sonra, məlumatların vizuallaşdırılması üçün histogramlar və scatter plotlar istifadə olunur. Bu, məlumatların paylanmasını və dəyişənlər arasındakı əlaqələri anlamağa kömək edir. Məlumatların korrelyasiya matrisi hesablanır və istilik xəritəsi vasitəsilə vizuallaşdırılır.
+
+Fuzzy C-Means klasterləşdirmə metodu tətbiq edilərək məlumatlar klasterlərə bölünür. Bu metod, məlumatların qeyri-müəyyənliklərini nəzərə alaraq daha yaxşı qruplaşdırma təmin edir. Klasterləşdirmə nəticələri vizuallaşdırılır və müxtəlif metrikler (Silhouette Score, Calinski-Harabasz Score, Davies-Bouldin Score) vasitəsilə qiymətləndirilir.
+
+Random Forest Regressor modeli tətbiq edilərək qiymət proqnozlaşdırma aparılır. Modelin performansı R² skoru və orta mütləq xəta (MAE) kimi metriklerlə qiymətləndirilir. Modelin əhəmiyyətli xüsusiyyətləri təhlil edilir və vizuallaşdırılır.
+
+Son olaraq, Fuzzy KNN regression metodu tətbiq edilir. Bu metod, ən yaxın qonşuların üzvlük dərəcələrini nəzərə alaraq daha yaxşı proqnozlaşdırma təmin edir. Minkowski məsafəsi əsasında ən yaxın qonşular tapılır və üzvlük dərəcələri hesablanır. Nəticələr, MSE, MAE, RMSE və R² kimi metriklerlə qiymətləndirilir.
+
+Bu təhlil və modelləşdirmə prosesi, avtomobil qiymətlərinin daha dəqiq proqnozlaşdırılması üçün müxtəlif yanaşmaları müqayisə edir və ən yaxşı nəticə verən metodu müəyyən etməyə çalışır.
