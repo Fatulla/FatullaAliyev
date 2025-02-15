@@ -1,0 +1,41 @@
+#include <Servo.h> // Servo kitabxanasını daxil edirik
+Servo myservo; // Servo obyekti yaradırıq
+
+int initial_position = 90; // Servonun başlanğıc mövqeyi (90 dərəcə)
+int LDR1 = A0; // Birinci LDR-nin bağlı olduğu pin
+int LDR2 = A1; // İkinci LDR-nin bağlı olduğu pin
+int error = 5; // İcazə verilən xəta dəyəri
+int servopin = 9; // Servonun bağlı olduğu pin
+
+void setup()
+{
+    myservo.attach(servopin); // Servonu müvafiq pinə bağlayırıq
+    pinMode(LDR1, INPUT); // LDR1-i giriş kimi təyin edirik
+    pinMode(LDR2, INPUT); // LDR2-i giriş kimi təyin edirik
+    myservo.write(initial_position); // Servonu başlanğıc mövqeyinə gətiririk
+    delay(2000); // 2 saniyə gözləyirik
+}
+
+void loop()
+{
+    int R1 = analogRead(LDR1); // LDR1-dən oxunan dəyər
+    int R2 = analogRead(LDR2); // LDR2-dən oxunan dəyər
+    int diff1 = abs(R1 - R2); // LDR1 və LDR2 arasındakı fərq
+    int diff2 = abs(R2 - R1); // LDR2 və LDR1 arasındakı fərq
+
+    if((diff1 <= error) || (diff2 <= error)) {
+        // Əgər fərq icazə verilən xəta dəyərindən kiçikdirsə, heç nə etmirik
+    } else {
+        if(R1 > R2) // Əgər LDR1-dən oxunan dəyər LDR2-dən böyükdürsə
+        {
+            initial_position = --initial_position; // Servonun mövqeyini bir dərəcə azaldırıq
+        }
+        if(R1 < R2) // Əgər LDR1-dən oxunan dəyər LDR2-dən kiçikdirsə
+        {
+            initial_position = ++initial_position; // Servonun mövqeyini bir dərəcə artırırıq
+        }
+    }
+
+    myservo.write(initial_position); // Servonu yeni mövqeyinə gətiririk
+    delay(100); // 100 millisaniyə gözləyirik
+}
