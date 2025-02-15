@@ -1,0 +1,79 @@
+#include <Servo.h> // Servo kitabxanasını daxil edirik
+
+// Üfüqi servo üçün təyinatlər
+Servo servohori; 
+int servoh = 0; 
+int servohLimitHigh = 160; // Üfüqi servonun yuxarı hərəkət limiti
+int servohLimitLow = 20; // Üfüqi servonun aşağı hərəkət limiti
+
+// Şaquli servo üçün təyinatlər
+Servo servoverti; 
+int servov = 0; 
+int servovLimitHigh = 160; // Şaquli servonun yuxarı hərəkət limiti
+int servovLimitLow = 20; // Şaquli servonun aşağı hərəkət limiti
+
+// LDR-lər üçün pin təyinatlari
+int ldrtopl = 2; // Yuxarı sol LDR
+int ldrtopr = 1; // Yuxarı sağ LDR
+int ldrbotl = 3; // Aşağı sol LDR
+int ldrbotr = 0; // Aşağı sağ LDR
+
+void setup () {
+    servohori.attach(10); // Üfüqi servonu 10-cu pinə bağlayırıq
+    servohori.write(0); // Üfüqi servonu başlanğıc mövqeyinə gətiririk
+    servoverti.attach(9); // Şaquli servonu 9-cu pinə bağlayırıq
+    servoverti.write(0); // Şaquli servonu başlanğıc mövqeyinə gətiririk
+    delay(500); // 500 millisaniyə gözləyirik
+}
+
+void loop() {
+    servoh = servohori.read(); // Üfüqi servonun mövqeyini oxuyuruq
+    servov = servoverti.read(); // Şaquli servonun mövqeyini oxuyuruq
+
+    int topl = analogRead(ldrtopl); // Yuxarı sol LDR-dən oxunan dəyər
+    int topr = analogRead(ldrtopr); // Yuxarı sağ LDR-dən oxunan dəyər
+    int botl = analogRead(ldrbotl); // Aşağı sol LDR-dən oxunan dəyər
+    int botr = analogRead(ldrbotr); // Aşağı sağ LDR-dən oxunan dəyər
+
+    // Ortalama dəyərləri hesablayırıq
+    int avgtop = (topl + topr) / 2; // Yuxarı LDR-lərin orta dəyəri
+    int avgbot = (botl + botr) / 2; // Aşağı LDR-lərin orta dəyəri
+    int avgleft = (topl + botl) / 2; // Sol LDR-lərin orta dəyəri
+    int avgright = (topr + botr) / 2; // Sağ LDR-lərin orta dəyəri
+
+    // Şaquli hərəkət üçün şərtlər
+    if (avgtop < avgbot) {
+        servoverti.write(servov + 1); // Şaquli servonu yuxarı hərəkət etdiririk
+        if (servov > servovLimitHigh) {
+            servov = servovLimitHigh; // Limitdən yuxarı çıxmasın deyə yoxlayırıq
+        }
+        delay(10);
+    } else if (avgbot < avgtop) {
+        servoverti.write(servov - 1); // Şaquli servonu aşağı hərəkət etdiririk
+        if (servov < servovLimitLow) {
+            servov = servovLimitLow; // Limitdən aşağı düşməsin deyə yoxlayırıq
+        }
+        delay(10);
+    } else {
+        servoverti.write(servov); // Heç bir dəyişiklik olmasa, servonu olduğu yerdə saxlayırıq
+    }
+
+    // Üfüqi hərəkət üçün şərtlər
+    if (avgleft > avgright) {
+        servohori.write(servoh + 1); // Üfüqi servonu sola hərəkət etdiririk
+        if (servoh > servohLimitHigh) {
+            servoh = servohLimitHigh; // Limitdən yuxarı çıxmasın deyə yoxlayırıq
+        }
+        delay(10);
+    } else if (avgright > avgleft) {
+        servohori.write(servoh - 1); // Üfüqi servonu sağa hərəkət etdiririk
+        if (servoh < servohLimitLow) {
+            servoh = servohLimitLow; // Limitdən aşağı düşməsin deyə yoxlayırıq
+        }
+        delay(10);
+    } else {
+        servohori.write(servoh); // Heç bir dəyişiklik olmasa, servonu olduğu yerdə saxlayırıq
+    }
+
+    delay(50); // 50 millisaniyə gözləyirik
+}
