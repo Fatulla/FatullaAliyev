@@ -1,0 +1,35 @@
+Birinci Kod (Tək İstiqamətli Servo):
+
+Bu kodda sadəcə bir servo motoru və iki LDR istifadə edirəm.
+
+Servo motoru üfüqi istiqamətdə hərəkət edir.
+
+İki LDR ilə işığın sol və sağ tərəflərdə olan intensivliyini ölçürəm.
+
+Əgər sol LDR daha çox işıq alırsa, servonu sola doğru hərəkət etdirirəm.
+
+Əgər sağ LDR daha çox işıq alırsa, servonu sağa doğru hərəkət etdirirəm.
+
+Bu sistem sadəcə bir ox üzrə (məsələn, üfüqi) işığı təqib edir.
+
+İkinci Kod (İki İstiqamətli Servo):
+
+Bu kodda iki servo motoru və dörd LDR istifadə edirəm.
+
+Bir servo üfüqi, digəri isə şaquli istiqamətdə hərəkət edir.
+
+Dörd LDR ilə işığın yuxarı, aşağı, sol və sağ tərəflərdə olan intensivliyini ölçürəm.
+
+Yuxarı və aşağı LDR-lərin orta dəyərlərini hesablayıb, şaquli servo motorunu yuxarı və ya aşağı hərəkət etdirirəm.
+
+Sol və sağ LDR-lərin orta dəyərlərini hesablayıb, üfüqi servo motorunu sola və ya sağa hərəkət etdirirəm.
+
+Bu sistem həm üfüqi, həm də şaquli ox üzrə işığı təqib edir.
+
+Ümumi İzah:
+
+Birinci kod sadəcə bir istiqamətdə (məsələn, üfüqi) işığı təqib edir. İkinci kod isə hər iki istiqamətdə (üfüqi və şaquli) işığı təqib edir.
+
+Birinci sistemdə iki LDR ilə işığın sol və sağ tərəfləri ölçülür, ikinci sistemdə isə dörd LDR ilə işığın hər dörd tərəfi (yuxarı, aşağı, sol, sağ) ölçülür.
+
+Hər iki sistemdə servo motorları işığın daha çox olduğu tərəfə doğru hərəkət edir, lakin ikinci sistem daha çox mürəkkəbdir və hər iki ox üzrə hərəkət imkanı verir.
